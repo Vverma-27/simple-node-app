@@ -32,12 +32,12 @@ jobs:
       - name: Create New Elastic Beanstalk Application Version
         run: |
           aws elasticbeanstalk create-application-version \
-            --application-name Express-aws-env  \
+            --application-name express-aws \
             --version-label v1.0.${{ github.run_number }} \
             --source-bundle S3Bucket="simple-node-app-bucket",S3Key="Dockerrun-${{ github.run_number }}.aws.json"
 
       - name: Deploy New Version to Elastic Beanstalk
         run: |
           aws elasticbeanstalk update-environment \
-            --environment-name express-env \
+            --environment-name Express-aws-env  \
             --version-label v1.0.${{ github.run_number }}
