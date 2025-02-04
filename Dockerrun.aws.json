@@ -3,7 +3,7 @@
     "containerDefinitions": [
         {
             "name": "express-app",
-            "image": "your-dockerhub-username/express-aws:latest",
+            "image": "vihaanv07/express-aws:latest",
             "memory": 512,
             "essential": true,
             "portMappings": [
