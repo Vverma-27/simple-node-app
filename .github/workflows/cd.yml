@@ -1,0 +1,43 @@
+name: CD - Deploy to Elastic Beanstalk
+
+on:
+  workflow_run:
+    workflows: ["CI - Build and Push Docker Image"]
+    types:
+      - completed
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v3
+
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1 # Change this to your AWS region
+
+      - name: Update Dockerrun.aws.json with New Image
+        run: |
+          sed -i 's|your-dockerhub-username/express-aws:latest|${{ secrets.DOCKERHUB_USERNAME }}/express-aws:${{ github.run_number }}|' Dockerrun.aws.json
+
+      - name: Upload Dockerrun.aws.json to S3
+        run: |
+          aws s3 cp Dockerrun.aws.json s3://your-s3-bucket/Dockerrun-${{ github.run_number }}.aws.json
+
+      - name: Create New Elastic Beanstalk Application Version
+        run: |
+          aws elasticbeanstalk create-application-version \
+            --application-name express-aws \
+            --version-label v1.0.${{ github.run_number }} \
+            --source-bundle S3Bucket="your-s3-bucket",S3Key="Dockerrun-${{ github.run_number }}.aws.json"
+
+      - name: Deploy New Version to Elastic Beanstalk
+        run: |
+          aws elasticbeanstalk update-environment \
+            --environment-name express-env \
+            --version-label v1.0.${{ github.run_number }}
