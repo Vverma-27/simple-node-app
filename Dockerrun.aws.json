@@ -1,17 +1,12 @@
 {
-    "AWSEBDockerrunVersion": 2,
-    "containerDefinitions": [
+    "AWSEBDockerrunVersion": 1,
+    "Image": {
+        "Name": "vihaanv07/express-aws:latest",
+        "Update": "true"
+    },
+    "Ports": [
         {
-            "name": "express-app",
-            "image": "vihaanv07/express-aws:latest",
-            "memory": 512,
-            "essential": true,
-            "portMappings": [
-                {
-                    "containerPort": 3000,
-                    "hostPort": 80
-                }
-            ]
+            "ContainerPort": "3000"
         }
     ]
 }
