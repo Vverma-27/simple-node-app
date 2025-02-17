@@ -12,3 +12,4 @@ hooks:
     - location: wati-webhook/scripts/application_start.sh
       timeout: 300
       runas: ubuntu
+file_exists_behavior: OVERWRITE
