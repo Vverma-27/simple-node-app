@@ -14,7 +14,7 @@ RUN npm install
 COPY . .
 
 # Expose the port Elastic Beanstalk will use
-EXPOSE 3000
+EXPOSE 80
 
 # Command to run the application
 CMD ["npm", "start"]
