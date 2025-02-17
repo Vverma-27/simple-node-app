@@ -32,7 +32,6 @@ jobs:
       - name: Sts GetCallerIdentity
         run: |
           aws sts get-caller-identity
-
       # Step 3 - check the application-name and deployment group name
       - name: Create CodeDeploy Deployment
         id: deploy
