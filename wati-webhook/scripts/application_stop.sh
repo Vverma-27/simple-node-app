@@ -1,4 +1,5 @@
 #!/bin/bash
-#Stopping existing node servers
-echo "Stopping any existing node servers"
-pm2 stop wati-webhook
+set -x  # Enable debugging
+echo "Stopping Node.js server..."
+pkill node || { echo "pkill failed"; exit 1; }
+echo "Node.js server stopped."
