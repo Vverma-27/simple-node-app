@@ -5,14 +5,14 @@ files:
     destination: /home/ubuntu/wati-webhook
 hooks:
   ApplicationStop:
-    - location: wati-webhook/scripts/application_stop.sh
+    - location: /home/ubuntu/wati-webhook/scripts/scripts/application_stop.sh
       timeout: 300
       runas: ubuntu
   BeforeInstall:
-    - location: wati-webhook/scripts/before_install.sh
+    - location: /home/ubuntu/wati-webhook/scripts/scripts/before_install.sh
       timeout: 300
       runas: ubuntu
   ApplicationStart:
-    - location: wati-webhook/scripts/application_start.sh
+    - location: /home/ubuntu/wati-webhook/scripts/scripts/application_start.sh
       timeout: 300
       runas: ubuntu
