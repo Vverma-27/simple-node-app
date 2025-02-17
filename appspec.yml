@@ -5,7 +5,7 @@ files:
     destination: /home/ubuntu/wati-webhook
 hooks:
   ApplicationStop:
-    - location: wati-webhook/scripts/application_stop.sh
+    - location: wati-webhook/scripts/app_stop.sh
       timeout: 300
       runas: ubuntu
   BeforeInstall:
